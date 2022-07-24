@@ -1,0 +1,164 @@
+
+  <div class="container row">
+    <div class="col-sm-3 col-md-3 col-lg-3 border-style">
+      <div class="card-header " style="text-align: center;"> 
+        <h3>To-Do</h3>  
+        
+        <button
+        style="margin: 10px; padding: 5px"
+        type="button"
+        class="btn btn-primary"
+         [routerLink]="['/add-detail']"><span class='bi bi-plus-square-fill' ></span>
+        </button>
+        <!-- (click)="openPopup()" -->
+      </div>
+      <ng-container *ngIf="itemData.length != 0 ">
+        <div *ngFor="let item of itemData" class="card text-dark bg-warning mb-3 center" style="max-width: 16rem;margin: 10px">
+          <div class="card-header">
+            <img [src]="item.image_file" *ngIf="item.image_file" style="height: 100px; width:200px">
+            
+          </div>
+         
+          <div class="card-body">
+            <table>
+              <tr>
+                <td><strong>Title:</strong></td><td>{{item.task_title}}</td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td><td>{{item.task_description}}</td>
+              </tr>
+              <tr>
+                <td><strong>Priority:</strong></td><td>
+                  <select class="form-control" name="selectPriority" [(ngModel)]="item.priority">
+                    <option *ngFor="let priority of priorityList" [value]="priority.id">{{priority.value}}</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+            <!-- <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          </div>
+        </div>
+      </ng-container>
+      
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3 border-style">
+      <div class="card-header " style="text-align: center;"> 
+        <h3>In-Progress</h3>     
+        <button
+        style="margin: 10px; padding: 5px"
+        type="button" (click)="openPopup()"
+        class="btn btn-primary"><span class='bi bi-plus-square-fill' ></span>
+        </button>
+      </div>
+      <ng-container *ngIf="inProgressList.length != 0 ">
+        <div *ngFor="let item of inProgressList" class="card text-dark bg-warning mb-3 center" style="max-width: 16rem;margin: 10px">
+          <div class="card-header">
+            <img [src]="item.image_file" *ngIf="item.image_file" style="height: 100px; width:200px">
+            
+          </div>
+         
+          <div class="card-body">
+            <table>
+              <tr>
+                <td><strong>Title:</strong></td><td>{{item.task_title}}</td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td><td>{{item.task_description}}</td>
+              </tr>
+              <tr>
+                <td><strong>Priority:</strong></td><td>
+                  <select class="form-control" name="selectPriority" [(ngModel)]="item.priority">
+                    <option *ngFor="let priority of priorityList" [value]="priority.id">{{priority.value}}</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+            <!-- <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div class="col-sm-3 col-md-3 col-lg-3 border-style">
+      <div class="card-header " style="text-align: center;"> 
+        <h3>Complete</h3> 
+            
+        <button
+        style="margin: 10px; padding: 5px"
+        type="button" (click)="openPopup()"
+        class="btn btn-primary"><span class='bi bi-plus-square-fill' ></span> 
+        </button>
+      </div>
+      <ng-container *ngIf="completedList.length != 0 ">
+        <div *ngFor="let item of completedList" class="card text-dark bg-warning mb-3 center" style="max-width: 16rem;margin: 10px">
+          <div class="card-header">
+            <img [src]="item.image_file" *ngIf="item.image_file" style="height: 100px; width:200px">
+            
+          </div>
+         
+          <div class="card-body">
+            <table>
+              <tr>
+                <td><strong>Title:</strong></td><td>{{item.task_title}}</td>
+              </tr>
+              <tr>
+                <td><strong>Description:</strong></td><td>{{item.task_description}}</td>
+              </tr>
+              <tr>
+                <td><strong>Priority:</strong></td><td>
+                  <select class="form-control" name="selectPriority" [(ngModel)]="item.priority">
+                    <option *ngFor="let priority of priorityList" [value]="priority.id">{{priority.value}}</option>
+                  </select>
+                </td>
+              </tr>
+            </table>
+            <!-- <h5 class="card-title">Warning card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  
+
+<div  class="modal"  tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}"  >
+  <div class="modal-dialog" role="document">
+    <div class="container border-design">
+      <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Task Detail</h4>
+          </div>
+          <br>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="selecttask">Select Task</label>
+                <select class="form-control" name="selecttask" [(ngModel)]="selectedTask">
+                  <option *ngFor="let item of itemData" [value]="item.task_title">{{item.task_title}}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="selectcolumn">Select Priority</label>
+                <select class="form-control" name="selectcolumn" [(ngModel)]="selectPriority" >
+                  <option *ngFor="let item of columnItemList" [value]="item.name">{{item.name}}</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" (click)="addTodoData()" >
+              Submit
+            </button> &nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" 
+            (click)="closePopup()"   >
+              Cancel
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>      
+  
+

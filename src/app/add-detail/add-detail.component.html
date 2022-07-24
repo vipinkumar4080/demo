@@ -1,0 +1,56 @@
+<!--role="dialog" [ngStyle]="{'display':displayStyle}" -->
+
+<!-- <div  class="modal"  tabindex="-1"   >
+    <div class="modal-dialog" role="document"> -->
+      <div class="container border-design">
+        <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add Task Detail</h4>
+            </div>
+            <br>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="taskTitle">Task title</label>
+                  <input type="text" class="form-control" name="taskTitle" [(ngModel)]="addDetail.task_title">
+                </div>
+                <div class="form-group">
+                  <label for="taskDescription">Task description</label>
+                  <textarea type="area" class="form-control" name="taskDescription" [(ngModel)]="addDetail.task_description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="selectPriority">Select Priority</label>
+                  <select class="form-control" name="selectPriority" [(ngModel)]="addDetail.priority">
+                    <option *ngFor="let priority of priorityList" [value]="priority.id">{{priority.value}}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="file">Choose File</label>
+                  <input 
+                      id="file" 
+                      type="file" 
+                      class="form-control"
+                      (change)="onFileChange($event)">
+                  
+                  <!-- <label class="form-label" for="customFile">Choose file</label>
+                  <input type="file" class="form-control" name="customFile" [(ngModel)]="addDetail.image_file" /> -->
+                </div>
+              </form>
+        
+            </div>
+            <br>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-success" (click)="addTaskDetail()">
+                Submit
+              </button> &nbsp;&nbsp;&nbsp;
+              <button type="button" class="btn btn-danger" 
+              [routerLink]="['/home-page']"      >
+                Cancel
+              </button>
+              <!-- (click)="closePopup()" -->
+            </div>
+          </div>
+      </div>
+        
+    <!-- </div>
+    </div> -->
